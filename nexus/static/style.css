@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+.absolute {
+    font-family: monospace;
+}
+
+.bg-darker {
+    background: #222222;
+}
+
+.bg-black {
+    background: black;
+}
+
+.logo {
+    color: aquamarine !important;
+    font-family: monospace;
+    font-size: 40px;
+    padding: 10px 30px;
+}
+
+.search-bar {
+    background: black;
+    border: none;
+    border-radius: 15px;
+}
