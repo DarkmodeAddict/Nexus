@@ -13,4 +13,11 @@
 - Changed the inbuilt User profile at ./nexus/admin.py.
 - Created profile model and connected attributes at ./nexus/models.py.
 - Automated profile creations for Profile model.
-- 
+
+### Version 0.3
+- Follow and Unfollow system initiated.
+- Profile view showcasing accounts thay follow and unfollow at ./nexus/views.py.
+- View user profile hidden until authenticated.
+- Error banners added through ./nexus/templates/base.html.
+- Each individual profile page for users.
+- Bug for Followers and Following not shown solved (rendering problem).
