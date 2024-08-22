@@ -41,4 +41,11 @@
 
 .profile-tags {
     color: darkturquoise !important;
+    text-decoration: none !important;
+}
+
+.nex {
+    border: none;
+    color: white;
+    font-size: 18px;
 }

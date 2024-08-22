@@ -21,3 +21,7 @@
 - Error banners added through ./nexus/templates/base.html.
 - Each individual profile page for users.
 - Bug for Followers and Following not shown solved (rendering problem).
+
+### Version 0.4
+- Tweet system implemented (called Nex p:Nux).
+- Nux model defined at ./nexus/model.py and implemented by ./nexus/views.py.

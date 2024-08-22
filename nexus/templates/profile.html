@@ -4,12 +4,19 @@
   {% if profile %}
     <div class="container text-center">
       <h1> {{ profile.user.username }}'s Profile </h1>
+      {% if nux %}
+        {% for nex in nux %}
+          <div class='alert bg-dark nex' role='alert'>
+            {{ nex }} <br>
+          </div>
+        {% endfor %}
+      {% endif %}
       <div class="card bg-dark">
         <h5 class="card-header"> <strong> Follows </strong> </h5>
         <br>
         <p class="card-text">
           {% for following in profile.follows.all %}
-            <a href="{% url "profile" following.user.id %}"> @{{ following }} </a> <br>
+            <a class="profile-tags" href="{% url "profile" following.user.id %}"> @{{ following }} </a> <br>
           {% endfor %}
         </p>
         <br>
@@ -19,7 +26,7 @@
         <br>
         <p class="card-text">
           {% for following in profile.followed_by.all %}
-            <a href="{% url "profile" following.user.id %}"> @{{ following }} </a>
+            <a class="profile-tags" href="{% url "profile" following.user.id %}"> @{{ following }} </a>
           {% endfor %}
         </p>
         <br>
