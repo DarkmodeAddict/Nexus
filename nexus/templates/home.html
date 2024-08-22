@@ -1,11 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1> Hello World </h1>
+  <h1> See whats Latest </h1>
 
   {% for nex in nux %}
     <div class='alert bg-dark nex' role='alert'>
-      {{ nex }} <br>
+      {{ nex.body }} <br>
+      <small class="text-muted">
+        {{ nex.created_at }} by @{{ nex.user.username }}
+      </small>
     </div>
   {% endfor %}
+
+  {% if form %}
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-secondary"> Post Nex </button>
+    </form>
+  {% endif %}
 {% endblock %}

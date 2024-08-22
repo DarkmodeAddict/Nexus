@@ -1,11 +1,23 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Profile, Nux
+from .forms import NuxForm
 
 def home(request):
     if request.user.is_authenticated:
+        form = NuxForm(request.POST or None)
+        if request.method == 'POST':
+            if form.is_valid():
+                nex = form.save(commit=False)
+                nex.user = request.user
+                nex.save()
+                messages.success(request, ('Nexed'))
+                return redirect('home')
         nux = Nux.objects.all().order_by('-created_at')
-    return render(request, 'home.html', {'nux': nux})
+        return render(request, 'home.html', {'nux': nux, 'form':form})
+    else:
+        nux = Nux.objects.all().order_by('-created_at')
+        return render(request, 'home.html', {'nux': nux})
 
 def profile_list(request):
     if request.user.is_authenticated:

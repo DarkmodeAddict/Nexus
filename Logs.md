@@ -25,3 +25,7 @@
 ### Version 0.4
 - Tweet system implemented (called Nex p:Nux).
 - Nux model defined at ./nexus/model.py and implemented by ./nexus/views.py.
+
+### Version 0.5
+- Nex postings from forms initiated at ./nexus/forms.py.
+- View system for Nex page changed to use on validation done at ./nexus/views.py.
