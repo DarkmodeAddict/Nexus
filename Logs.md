@@ -29,3 +29,8 @@
 ### Version 0.5
 - Nex postings from forms initiated at ./nexus/forms.py.
 - View system for Nex page changed to use on validation done at ./nexus/views.py.
+
+### Version 0.6
+- Authentication system for users login and logout.
+- Separate login page template at ./nexus/templates/login.html.
+- Authentication system initiated at ./nexus/views.py.
