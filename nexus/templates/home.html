@@ -1,14 +1,28 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
   <h1> See whats Latest </h1>
 
   {% for nex in nux %}
     <div class='alert bg-dark nex' role='alert'>
-      {{ nex.body }} <br>
-      <small class="text-muted">
-        {{ nex.created_at }} by @{{ nex.user.username }}
-      </small>
+      <div class="container">
+        <div class="row">
+          <div class="col-1">
+            {% if nex.user.profile.profile_image %}
+              <img src="{{ nex.user.profile.profile_image.url }}" alt="" height="50" width="50" class="rounded-circle">
+            {% else %}
+              <img src="{% static "images/logo.png" %}" alt="" height="50" width="50" class="rounded-circle">
+            {% endif %}
+          </div>
+          <div class="col-10">
+            {{ nex.body }} <br>
+              <small class="text-muted">
+                {{ nex.created_at }} by @{{ nex.user.username }}
+              </small>
+          </div>
+        </div>
+      </div>
     </div>
   {% endfor %}
 

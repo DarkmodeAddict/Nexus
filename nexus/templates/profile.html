@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
   {% if profile %}
@@ -7,11 +8,31 @@
       {% if nux %}
         {% for nex in nux %}
           <div class='alert bg-dark nex' role='alert'>
-            {{ nex }} <br>
+            <div class="container">
+              <div class="row">
+                <div class="col-1">
+                  {% if profile.profile_image %}
+                    <img src="{{ profile.profile_image.url }}" alt="" height="50" width="50" class="rounded-circle">
+                  {% else %}
+                    <img src="{% static "images/logo.png" %}" alt="" height="50" width="50" class="rounded-circle">
+                  {% endif %}
+                </div>
+                <div class="col-10">
+                  {{ nex.body }} <br>
+                    <small class="text-muted">
+                      {{ nex.created_at }} by @{{ nex.user.username }}
+                    </small>
+                </div>
+              </div>
+            </div>
           </div>
         {% endfor %}
       {% endif %}
       <div class="card bg-dark">
+        {% if profile.profile_image %}
+          <img src="{{ profile.profile_image.url }}" alt="" class="rounded-circle" height="100" width="100">
+        {% endif %}
+        <br>
         <h5 class="card-header"> <strong> Follows </strong> </h5>
         <br>
         <p class="card-text">

@@ -43,3 +43,11 @@
 - Update profile system with template at ./nexus/templates/update_user.html.
 
 ### Version 0.8
+- Picture handling option enabled from ./project/settings.py.
+- Media url added for media at ./project/urls.py.
+- Profile Picture attribute creation at ./nexus/models.py.
+- Profile pic upload form creation at ./nexus/forms.py.
+- Profile pic view option at profile page, profile_list page and home page.
+- Foreign key reference for home page for the profile pic.
+- New media folder where profile pictures are stored.
+- Logic for profile viewing at ./nexus/views.py.
