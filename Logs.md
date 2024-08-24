@@ -40,3 +40,6 @@
 - Separate registration template at ./nexus/templates/register.html.
 - Authentication system done at ./nexus/views.py.
 - Registration form system done at ./nexus/forms.py.
+- Update profile system with template at ./nexus/templates/update_user.html.
+
+### Version 0.8
