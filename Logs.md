@@ -34,3 +34,9 @@
 - Authentication system for users login and logout.
 - Separate login page template at ./nexus/templates/login.html.
 - Authentication system initiated at ./nexus/views.py.
+
+### Version 0.7
+- Authentication system for registration of new users.
+- Separate registration template at ./nexus/templates/register.html.
+- Authentication system done at ./nexus/views.py.
+- Registration form system done at ./nexus/forms.py.
