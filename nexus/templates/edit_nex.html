@@ -4,7 +4,6 @@
 {% block content %}
   <h1> See whats Latest </h1>
 
-  {% for nex in nux %}
     <div class='alert bg-dark nex' role='alert'>
       <div class="container">
         <div class="row">
@@ -20,26 +19,22 @@
               <small class="text-muted">
                 {{ nex.created_at }} by @{{ nex.user.username }} - {{ nex.number_of_likes }} likes
                 {% if user in nex.likes.all %}
-                  <a href="{% url "nex_like" nex.id %}"> <i style="color:#ff004f;" class="fa fa-heart"> </i></a>
+                  <a href="{% url "nex_like" nex.id %}"> <i style="color:#ff004f;" class="fa fa-heart"></i> </a>
                 {% else %}
-                  <a href="{% url "nex_like" nex.id %}"> <i style="color:#ff004f;" class="fa fa-heart-o"> </i></a>
-                {% endif %} 
-                <a href="{% url "nex_show" nex.id %}"> <i style="color:aquamarine;" class="fa fa-share"></i></a>
-                {% if request.user.username == profile.user.username %}
-                  <a href="{% url "delete_nex" nex.id %}"> <i style="color:grey;" class="fa fa-trash-alt"></i></a>
+                  <a href="{% url "nex_like" nex.id %}"> <i style="color:#ff004f;" class="fa fa-heart-o"></i> </a>
                 {% endif %}
               </small>
           </div>
         </div>
       </div>
     </div>
-  {% endfor %}
+  
 
   {% if form %}
     <form method="POST">
       {% csrf_token %}
       {{ form.as_p }}
-      <button type="submit" class="btn btn-secondary"> Post Nex </button>
+      <button type="submit" class="btn btn-secondary"> Update Nex </button>
     </form>
   {% endif %}
 {% endblock %}

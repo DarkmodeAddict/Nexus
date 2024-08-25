@@ -167,3 +167,38 @@ def follows(request, pk):
     else:
         messages.success(request, ('You must be logged in to see others profiles'))
         return redirect('home')
+    
+def delete_nex(request, pk):
+    if request.user.is_authenticated:
+        nex = get_object_or_404(Nux, id=pk)
+        if request.user.username == nex.user.username:
+            nex.delete()
+            messages.success(request, ('Nex deleted successfully'))
+            return redirect(request.META.get('HTTP_REFERER'))
+        else:
+            messages.success(request, ('Not your Nex!'))
+            return redirect(request.META.get('HTTP_REFERER'))
+    else:
+        messages.success(request, ('Nex not found!'))
+        return redirect(request.META.get('HTTP_REFERER'))
+    
+def edit_nex(request, pk):
+    if request.user.is_authenticated:
+        nex = get_object_or_404(Nux, id=pk)
+        if request.user.username == nex.user.username:
+            form = NuxForm(request.POST or None, instance=nex)
+            if request.method == 'POST':
+                if form.is_valid():
+                    nex = form.save(commit=False)
+                    nex.user = request.user
+                    nex.save()
+                    messages.success(request, ('Nex updated'))
+                    return redirect('home')      
+            else:
+                return render(request, 'edit_nex.html', {'form':form, 'nex':nex})
+        else:
+            messages.success(request, ('Not your Nex!'))
+            return redirect('home')
+    else:
+        messages.success(request, ('Nex not found!'))
+        return redirect('home')

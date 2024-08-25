@@ -22,9 +22,14 @@
                     <small class="text-muted">
                       {{ nex.created_at }} by @{{ nex.user.username }} - {{ nex.number_of_likes }} Likes
                       {% if user in nex.likes.all %}
-                        <a href="{% url "nex_like" nex.id %}"> <i style="color:#ff004f;" class="fa fa-heart"></i> </a>
+                        <a href="{% url "nex_like" nex.id %}"> <i style="color:#ff004f;" class="fa fa-heart"></i></a>
                       {% else %}
-                        <a href="{% url "nex_like" nex.id %}"> <i style="color:#ff004f;" class="fa fa-heart-o"></i> </a>
+                        <a href="{% url "nex_like" nex.id %}"> <i style="color:#ff004f;" class="fa fa-heart-o"></i></a>
+                      {% endif %}
+                      <a href="{% url "nex_show" nex.id %}"> <i style="color:aquamarine;" class="fa fa-share"></i></a>
+                      {% if request.user.username == profile.user.username %}
+                        <a href="{% url "delete_nex" nex.id %}"> <i style="color:grey;" class="fa fa-trash-alt"></i></a>
+                        <a href="{% url "edit_nex" nex.id %}"> <i style="color:grey;" class="fa fa-edit"></i></a>
                       {% endif %}
                     </small>
                 </div>

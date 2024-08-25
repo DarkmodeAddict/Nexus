@@ -75,3 +75,8 @@
 - Separate followers and following viewing page created.
 - Followers and Following views created at ./nexus/views.py.
 - Following and Unfollowing from specific pages option enabled as well.
+
+### Version 0.13
+- Deletion of Nex enabled with view at ./nexus/views.py.
+- Editing of Nex enabled with view at ./nexus/views.py.
+- Editing of Nex in a new page called ./nexus/templates/edit_nex.py.
