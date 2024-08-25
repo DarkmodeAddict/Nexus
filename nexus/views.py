@@ -121,3 +121,25 @@ def nex_show(request, pk):
     else:
         messages.success(request, ('Nex not found!'))
         return redirect('home')
+    
+def unfollow(request, pk):
+    if request.user.is_authenticated:
+        profile = Profile.objects.get(user_id=pk)
+        request.user.profile.follows.remove(profile)
+        request.user.profile.save()
+        messages.success(request, (f'Unfollowed {profile.user.username}'))
+        return redirect(request.META.get('HTTP_REFERER'))
+    else:
+        messages.success(request, ('You are not logged in!'))
+        return redirect('home')
+    
+def follow(request, pk):
+    if request.user.is_authenticated:
+        profile = Profile.objects.get(user_id=pk)
+        request.user.profile.follows.add(profile)
+        request.user.profile.save()
+        messages.success(request, (f'Followed {profile.user.username}'))
+        return redirect(request.META.get('HTTP_REFERER'))
+    else:
+        messages.success(request, ('You are not logged in!'))
+        return redirect('home')

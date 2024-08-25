@@ -62,3 +62,11 @@
 ### Version 0.10
 - Viewing option for individual Nex.
 - Separate template creation at ./nexus/templates/show_nex.py.
+
+### Version 0.11
+- Profile bio and other social link models created at ./nexus/models.py.
+- Displayed at profile page of user.
+- Profile icon button for profile page navigation done in ./nexus/templates/navbar.html.
+- Follow and Unfollow system from profile page system made.
+- New view system and url at ./nexus/views.py and ./nexus/urls.py.
+- Form model for profile bio and likes at ./nexus/forms.py.

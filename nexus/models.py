@@ -9,6 +9,10 @@ class Profile(models.Model):
         symmetrical=False, blank=True)
     date_modified = models.DateTimeField(User, auto_now=True)
     profile_image = models.ImageField(null=True, blank=True, upload_to='profile_images/')
+    profile_bio = models.CharField(null=True, blank=True, max_length=1000)
+    facebook_link = models.CharField(null=True, blank=True, max_length=100)
+    instagram_link = models.CharField(null=True, blank=True, max_length=100)
+    snapchat_link = models.CharField(null=True, blank=True, max_length=100)
     
     def __str__(self):
         return self.user.username

@@ -27,10 +27,23 @@
           </li>
         {% endif %}
       </ul>
-      <form class="d-flex">
+      {% comment %} <form class="d-flex">
         <input class="form-control me-2 search-bar" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      </form> {% endcomment %}
+      {% if user.is_authenticated %}
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-link navbar-brand">
+            <a href="{% url "profile" request.user.id %}">
+              {% if user.profile.profile_image %}
+                <img src="{{ user.profile.profile_image.url }}" alt="" class="rounded-circle" height="60" width="60">
+              {% else %}
+                <img src="{% static "images/logo.png" %}" alt="" class="rounded-circle" height="60" width="60">
+              {% endif %}
+            </a>
+          </li>
+        </ul>
+      {% endif %}
     </div>
   </div>
 </nav>
