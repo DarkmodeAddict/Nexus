@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <h1> Search User </h1>
+  <form method="POST">
+    {% csrf_token %}
+    <input type="input" class="form-control" placeholder="Search User" name="search">
+    <button type="submit" class="btn btn-secondary"> Search </button>
+  </form>
+  {% if search %}
+    <p> You searched for: {{ search }} </p>
+  {% endif %}
+  {% if searched %} 
+    {% for result in searched %}
+        <div class="card bg-dark mb-3" style="max-width: 540px">
+        <div class="row g-0">
+            <div class="col-md-4">
+            {% if result.profile.profile_image %}
+                <img src="{{ result.profile.profile_image.url }}" alt="" height="200" width="200" class="img-fluid rounded-circle">
+            {% else %}
+                <img src="{% static "images/logo.png" %} " height="200" width="200" class="img-fluid rounded-circle" alt="" />
+            {% endif %}
+            </div>
+            <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title"> {{ result.profile.user.username }} </h5>
+                <p class="card-text"> <a class="profile-tags" href="{% url "profile" result.profile.user.id %}"> @{{ result.profile.user.username|lower }} </a> </p>
+                <p class="card-text">
+                <small class="text-body-secondary"> {{ result.profile.date_modified }} </small>
+                </p>
+            </div>
+            </div>
+        </div>
+        </div>
+    {% endfor %}
+  {% else %}
+    {% if searched == None %}
+    
+    {% else %}
+      <p> No users found containing {{ search }}! Please try again </p>
+    {% endif %}
+  {% endif %} 
+{% endblock %}

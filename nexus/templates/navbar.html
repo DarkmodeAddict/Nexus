@@ -26,11 +26,26 @@
             <a class="nav-link nava" href="{% url "login" %}"> Register </a>
           </li>
         {% endif %}
+        
+        
       </ul>
       {% comment %} <form class="d-flex">
         <input class="form-control me-2 search-bar" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form> {% endcomment %}
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Search
+        </button>
+        <ul class="dropdown-menu dropdown-menu-dark">
+          <li class="nav-item">
+            <a class="nav-link nava" href="{% url "search" %}"> Search Nex </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nava" href="{% url "search_user" %}"> Search User </a>
+          </li>
+        </ul>
+      </div>
       {% if user.is_authenticated %}
         <ul class="navbar-nav ml-auto">
           <li class="nav-link navbar-brand">

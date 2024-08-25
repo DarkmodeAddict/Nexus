@@ -80,3 +80,10 @@
 - Deletion of Nex enabled with view at ./nexus/views.py.
 - Editing of Nex enabled with view at ./nexus/views.py.
 - Editing of Nex in a new page called ./nexus/templates/edit_nex.py.
+
+### Version 0.14
+- Search features enabled for Nex and Users.
+- Two different search values for Nex and Users defined by ./nexus/views.py.
+- Separate templates for searching of Users and Nexes.
+- User Search happens at ./nexus/templates/search_nex.html.
+- Nex Search happens at ./nexus/templates/search_user.html.
