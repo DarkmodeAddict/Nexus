@@ -13,7 +13,7 @@ class NuxForm(forms.ModelForm):
 
     class Meta:
         model = Nux
-        exclude = ('user',)
+        exclude = ('user', 'likes',)
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(label='', widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Email Address'}))

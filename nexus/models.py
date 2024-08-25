@@ -26,6 +26,10 @@ class Nux(models.Model):
     user = models.ForeignKey(User, related_name='nux', on_delete=models.DO_NOTHING)
     body = models.CharField(max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)
+    likes = models.ManyToManyField(User, related_name='nex_like', blank=True)
+
+    def number_of_likes(self):
+        return self.likes.count()
 
     def __str__(self):
         return (

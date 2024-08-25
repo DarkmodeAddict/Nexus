@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import Profile, Nux
 from .forms import NuxForm, SignUpForm, ProfilePicForm
@@ -100,4 +100,16 @@ def update_user(request):
         return render(request, 'update_user.html', {'user_form':user_form, 'profile_form':profile_form})
     else:
         messages.success(request, ('You are not logged in'))
+        return redirect('home')
+    
+def nex_like(request, pk):
+    if request.user.is_authenticated:
+        nex = get_object_or_404(Nux, id=pk)
+        if nex.likes.filter(id=request.user.id):
+            nex.likes.remove(request.user)
+        else:
+            nex.likes.add(request.user)
+        return redirect(request.META.get('HTTP_REFERER'))
+    else:
+        messages.success(request, ('You are not logged in!'))
         return redirect('home')

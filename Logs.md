@@ -51,3 +51,10 @@
 - Foreign key reference for home page for the profile pic.
 - New media folder where profile pictures are stored.
 - Logic for profile viewing at ./nexus/views.py.
+
+### Version 0.9
+- Like and unlike system for Nex creation.
+- Likes system model designed at ./nexus/models.py.
+- Like rendering system created via views at ./nexus/views.py and ./nexus/urls.py.
+- Like system render working tests.
+- Like texts reflected using heart symbols.
