@@ -113,3 +113,11 @@ def nex_like(request, pk):
     else:
         messages.success(request, ('You are not logged in!'))
         return redirect('home')
+    
+def nex_show(request, pk):
+    nex = get_object_or_404(Nux, id=pk)
+    if nex:
+        return render(request, 'show_nex.html', {'nex':nex})
+    else:
+        messages.success(request, ('Nex not found!'))
+        return redirect('home')

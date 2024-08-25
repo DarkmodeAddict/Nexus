@@ -58,3 +58,7 @@
 - Like rendering system created via views at ./nexus/views.py and ./nexus/urls.py.
 - Like system render working tests.
 - Like texts reflected using heart symbols.
+
+### Version 0.10
+- Viewing option for individual Nex.
+- Separate template creation at ./nexus/templates/show_nex.py.
