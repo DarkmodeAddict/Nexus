@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 
+# import dj_database_url
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,7 +28,7 @@ SECRET_KEY = 'django-insecure-thz745x2*t%p#u!epuwlrypak43udq$=bn^3dw2s-cl(sn+kj!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.vercel.app']
 
 
 # Application definition
@@ -82,6 +84,20 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'DATABASE_URL': 'postgresql://postgres:RVzzYrULApLzjjolZvaEjWvgzMQAmUzB@autorack.proxy.rlwy.net:43180/railway',
+#         'NAME': 'railway',
+#         'USER': 'postgres',
+#         'PASSWORD': 'RVzzYrULApLzjjolZvaEjWvgzMQAmUzB',
+#         'HOST': 'autorack.proxy.rlwy.net:5432',
+#         'PORT': '5432',
+#     }
+# }
+# DATABASES = {
+#     'default': dj_database_url.config(default=os.environ.get('postgresql://postgres:RVzzYrULApLzjjolZvaEjWvgzMQAmUzB@autorack.proxy.rlwy.net:43180/railway'),conn_max_age=1800)
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -118,7 +134,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = ['static/']
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
