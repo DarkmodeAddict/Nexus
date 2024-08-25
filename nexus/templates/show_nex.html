@@ -2,22 +2,23 @@
 {% load static %}
 
 {% block content %}
-  <h1> See whats Latest </h1>
-
+  
+  <div class="editer">
     <div class='alert bg-dark nex' role='alert'>
       <div class="container">
         <div class="row">
-          <div class="col-1">
+          <div class="bodymain">
             {% if nex.user.profile.profile_image %}
               <img src="{{ nex.user.profile.profile_image.url }}" alt="" height="50" width="50" class="rounded-circle">
             {% else %}
               <img src="{% static "images/logo.png" %}" alt="" height="50" width="50" class="rounded-circle">
             {% endif %}
+            <p>{{ nex.body }}</p>
           </div>
-          <div class="col-10">
-            {{ nex.body }} <br>
+          <div>
+             
               <small class="text-muted">
-                {{ nex.created_at }} by @{{ nex.user.username }} - {{ nex.number_of_likes }} likes
+                {{ nex.created_at }} by <br> @{{ nex.user.username }} - {{ nex.number_of_likes }} likes
                 {% if user in nex.likes.all %}
                   <a href="{% url "nex_like" nex.id %}"> <i style="color:#ff004f;" class="fa fa-heart"></i> </a>
                 {% else %}
@@ -28,13 +29,7 @@
         </div>
       </div>
     </div>
-  
+  </div>
 
-  {% if form %}
-    <form method="POST">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit" class="btn btn-secondary"> Post Nex </button>
-    </form>
-  {% endif %}
+  
 {% endblock %}

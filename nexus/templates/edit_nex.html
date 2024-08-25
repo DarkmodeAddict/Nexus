@@ -2,39 +2,40 @@
 {% load static %}
 
 {% block content %}
-  <h1> See whats Latest </h1>
-
-    <div class='alert bg-dark nex' role='alert'>
-      <div class="container">
-        <div class="row">
-          <div class="col-1">
-            {% if nex.user.profile.profile_image %}
-              <img src="{{ nex.user.profile.profile_image.url }}" alt="" height="50" width="50" class="rounded-circle">
-            {% else %}
-              <img src="{% static "images/logo.png" %}" alt="" height="50" width="50" class="rounded-circle">
-            {% endif %}
-          </div>
-          <div class="col-10">
-            {{ nex.body }} <br>
-              <small class="text-muted">
-                {{ nex.created_at }} by @{{ nex.user.username }} - {{ nex.number_of_likes }} likes
-                {% if user in nex.likes.all %}
-                  <a href="{% url "nex_like" nex.id %}"> <i style="color:#ff004f;" class="fa fa-heart"></i> </a>
-                {% else %}
-                  <a href="{% url "nex_like" nex.id %}"> <i style="color:#ff004f;" class="fa fa-heart-o"></i> </a>
-                {% endif %}
-              </small>
+  <div class="editer">
+    <h1 style="text-align: center"> <span>Edit</span> your Nex </h1>
+      <div class='alert bg-dark nex' role='alert'>
+        <div class="container">
+          <div class="row">
+            <div class="bodymain">
+              {% if nex.user.profile.profile_image %}
+                <img src="{{ nex.user.profile.profile_image.url }}" alt="" height="50" width="50" class="rounded-circle">
+              {% else %}
+                <img src="{% static "images/logo.png" %}" alt="" height="50" width="50" class="rounded-circle">
+              {% endif %}
+              <p>{{ nex.body }}</p>
+            </div>
+            <div class="bodyside">
+                <small class="text-muted">
+                  {{ nex.created_at }} by <br> @{{ nex.user.username }} - {{ nex.number_of_likes }} likes
+                  {% if user in nex.likes.all %}
+                    <a href="{% url "nex_like" nex.id %}"> <i style="color:#ff004f;" class="fa fa-heart"></i> </a>
+                  {% else %}
+                    <a href="{% url "nex_like" nex.id %}"> <i style="color:#ff004f;" class="fa fa-heart-o"></i> </a>
+                  {% endif %}
+                </small>
+            </div>
           </div>
         </div>
       </div>
+    
+<br>
+    {% if form %}
+      <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btnaqua"> Update Nex </button>
+      </form>
+    {% endif %}
     </div>
-  
-
-  {% if form %}
-    <form method="POST">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit" class="btn btn-secondary"> Update Nex </button>
-    </form>
-  {% endif %}
 {% endblock %}

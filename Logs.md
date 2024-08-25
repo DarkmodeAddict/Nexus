@@ -87,3 +87,23 @@
 - Separate templates for searching of Users and Nexes.
 - User Search happens at ./nexus/templates/search_nex.html.
 - Nex Search happens at ./nexus/templates/search_user.html.
+
+### Version 0.15
+- Mega UI and design changes.
+- Changes for designs of Nex and Nex writing area in ./nexus/templates/home.html.
+- Changes for profile listing in ./nexus/templates/profile_list.html.
+- Changes in profile view of user at ./nexus/templates/profile.html.
+- Login form changed at ./nexus/templates/login.html.
+- Register form changed at ./nexus/templates/register.html.
+- Followers list page changed at ./nexus/templates/followers.html.
+- Following list page changed at ./nexus/templates/following.html.
+- Navbar changes at ./nexus/templates/navbar.html.
+- Editing of Nex page changed in ./nexus/templates/edit_nex.html.
+- Searching of users changed at ./nexus/templates/search_user.html.
+- Searching of nex changed at ./nexus/templates/search.html.
+- Changes of form layout at ./nexus/forms.py.
+- Bug fix for going to login on clicking register.
+- Mobile layout enhancement for all pages.
+- Update user form changed at ./nexus/templates/update_user.html.
+- Base changes at ./nexus/templates/base.html.
+- Pictures fluid and flow changed and fixed.

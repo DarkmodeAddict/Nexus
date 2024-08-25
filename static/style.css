@@ -48,13 +48,132 @@
     font-size: 20px;
 }
 
+.part {
+    display: flex;
+    flex-direction: row-reverse;
+}
+.left {
+    flex-basis: 65%;
+    margin: 0 55px;
+}
+.right {
+    flex-basis: 35%;
+    margin: 0 40px;
+}
+
 .profile-tags {
-    color: darkturquoise !important;
+    color: turquoise !important;
     text-decoration: none !important;
+}
+
+.nexwrite {
+    margin: 40px 0;
 }
 
 .nex {
     border: none;
     color: white;
     font-size: 18px;
+}
+
+.btnaqua {
+    color: white;
+    font-size: 18px;
+    background:darkturquoise;
+}
+.btnaqua:hover {
+    color: white;
+    background: darkcyan;
+}
+.btnaquas {
+    color: white;
+    font-size: 18px;
+    background:green;
+}
+.btnaquas:hover {
+    color: white;
+    background: rgb(0, 73, 0);
+}
+.btnaquad {
+    color: white;
+    font-size: 18px;
+    background:rgb(168, 0, 0);
+}
+.btnaquad:hover {
+    color: white;
+    background: rgb(107, 0, 0);
+}
+
+.alert {
+    margin-top: 30px;
+    border-radius: 30px;
+}
+
+.bodymain {
+    display: flex;
+}
+.bodymain p {
+    margin: 0 40px;
+}
+.bodyside {
+
+}
+
+.profpic {
+    display: flex !important;
+    padding: 20px 0;
+}
+.profpic i {
+    margin: 20px 0;
+    font-size: 25px;
+}
+
+.profiless {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    margin: 40px 0;
+    grid-gap: 60px;
+}
+.cardss {
+    padding: 40px 0;
+    display: flex !important;
+}
+.cardss img {
+    height: 100px;
+    width: 100px;
+    margin: 0 30px;
+}
+
+.inpdark {
+    background: #212529;
+    border: none;
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 20px;
+    color: white;
+}
+.editer {
+    margin: 0 200px;
+}
+
+span {
+    color: turquoise;
+}
+
+@media only screen and (max-width: 600px) {
+    .part {
+        display: block;
+    }
+    .left, .right {
+        margin: 0;
+    }
+    .profiless, .cardss {
+        display: block;
+    }
+    .cardss img {
+        margin: 0 15px;
+    }
+    .editer {
+        margin: 0;
+    }
 }

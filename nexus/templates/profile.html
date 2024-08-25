@@ -4,90 +4,119 @@
 {% block content %}
   {% if profile %}
     <div class="container text-center">
-      <h1> {{ profile.user.username }}'s Profile </h1>
-      {% if nux %}
-        {% for nex in nux %}
-          <div class='alert bg-dark nex' role='alert'>
-            <div class="container">
-              <div class="row">
-                <div class="col-1">
-                  {% if profile.profile_image %}
-                    <img src="{{ profile.profile_image.url }}" alt="" height="50" width="50" class="rounded-circle">
-                  {% else %}
-                    <img src="{% static "images/logo.png" %}" alt="" height="50" width="50" class="rounded-circle">
-                  {% endif %}
-                </div>
-                <div class="col-10">
-                  {{ nex.body }} <br>
-                    <small class="text-muted">
-                      {{ nex.created_at }} by @{{ nex.user.username }} - {{ nex.number_of_likes }} Likes
-                      {% if user in nex.likes.all %}
-                        <a href="{% url "nex_like" nex.id %}"> <i style="color:#ff004f;" class="fa fa-heart"></i></a>
-                      {% else %}
-                        <a href="{% url "nex_like" nex.id %}"> <i style="color:#ff004f;" class="fa fa-heart-o"></i></a>
-                      {% endif %}
-                      <a href="{% url "nex_show" nex.id %}"> <i style="color:aquamarine;" class="fa fa-share"></i></a>
-                      {% if request.user.username == profile.user.username %}
-                        <a href="{% url "delete_nex" nex.id %}"> <i style="color:grey;" class="fa fa-trash-alt"></i></a>
-                        <a href="{% url "edit_nex" nex.id %}"> <i style="color:grey;" class="fa fa-edit"></i></a>
-                      {% endif %}
-                    </small>
-                </div>
-              </div>
+      <h1> <span>Profile:</span> {{ profile.user.username }} </h1>
+      <div class="part">
+        <div class="right">
+          <br>
+          <div class="card bg-dark profpic">
+            <div>
+              {% if profile.profile_image %}
+                <img src="{{ profile.profile_image.url }}" alt="" class="rounded-circle" height="100" width="100">
+              {% endif %}
+            </div>
+            <div>
+              {% if profile.facebook_link %}
+                <a href="{{ profile.facebook_link }}" target="new"> <i style="color:deepblue" class="fa-brands fa-facebook-f"></i></a>
+              {% endif %}
+              {% if profile.instagram_link %}
+                <a href="{{ profile.instagram_link }}" target="new"> <i style="color:purple" class="fa-brands fa-instagram"></i></a>
+              {% endif %}
+              {% if profile.snapchat_link %}
+                <a href="{{ profile.snapchat_link }}" target="new"> <i style="color:yellow" class="fa-brands fa-snapchat"></i></a>
+              {% endif %}
+            </div>
+            <div>
+              {% if profile.profile_bio %}
+                {{ profile.profile_bio }}
+              {% endif %}
+            </div>
+            <br>
+          </div>
+          <br>
+          <div class="card bg-dark">
+            <h5 class="card-header"> <strong> Follows </strong> </h5>
+            <br>
+            <p class="card-text">
+              {% for following in profile.follows.all|slice:3 %}
+                <a class="profile-tags" href="{% url "profile" following.user.id %}"> @{{ following }} </a> 
+                <a href="{% url "unfollow" following.user.id %}"> <i class="fa fa-circle-minus small" aria-hidden="true" style="color:grey;"></i></a> <br>
+              {% endfor %}
+            </p>
+            <br>
+            <div class="card-footer text-end">
+              <a class="btn btn-sm btn-primary" href="{% url "follows" profile.user.id %}"> See All </a>
             </div>
           </div>
-        {% endfor %}
-      {% endif %}
-      <div class="card bg-dark">
-        {% if profile.profile_image %}
-          <img src="{{ profile.profile_image.url }}" alt="" class="rounded-circle" height="100" width="100">
-        {% endif %}
-        {% if profile.profile_bio %}
-          {{ profile.profile_bio }}
-        {% endif %}
-        <br>
-        <h5 class="card-header"> <strong> Follows </strong> </h5>
-        <br>
-        <p class="card-text">
-          {% for following in profile.follows.all|slice:3 %}
-            <a class="profile-tags" href="{% url "profile" following.user.id %}"> @{{ following }} </a> 
-            <a href="{% url "unfollow" following.user.id %}"> <i class="fa fa-circle-minus small" aria-hidden="true" style="color:grey;"></i></a> <br>
-          {% endfor %}
-        </p>
-        <br>
-        <div class="card-footer text-end">
-          <a class="btn btn-sm btn-primary" href="{% url "follows" profile.user.id %}"> See All </a>
+          <br>
+          <div class="card bg-dark">
+            <h5 class="card-header"> <strong> Followed By </strong> </h5>
+            <br>
+            <p class="card-text">
+              {% for following in profile.followed_by.all|slice:3 %}
+                <a class="profile-tags" href="{% url "profile" following.user.id %}"> @{{ following }} </a> 
+                {% if following in profile.follows.all %}
+                  <a href="{% url "unfollow" following.user.id %}"> <i class="fa fa-user-minus small" aria-hidden="true" style="color:red;"></i></a> <br> 
+                {% else %}
+                  <a href="{% url "follow" following.user.id %}"> <i class="fa fa-user-plus small" aria-hidden="true" style="color:lime;"></i></a> <br> 
+                {% endif %}
+              {% endfor %}
+            </p>
+            <br>
+            <div class="card-footer text-end">
+              <a class="btn btn-sm btn-primary" href="{% url "followers" profile.user.id %}"> See All </a>
+            </div>
+          </div> 
+          <br> 
+          <form method='POST'>
+            {% csrf_token %}
+            {% if profile in user.profile.follows.all %}
+              <button class="btn btnaquad" name="follow" value="unfollow" type="submit"> unfollow @{{ profile.user.username|lower }} </button>
+            {% else %}
+              <button class="btn btnaquas" name="follow" value="follow" type="submit"> follow @{{ profile.user.username|lower }} </button>
+            {% endif %}
+          </form>
+          <br>
+          {% if request.user.id == profile.user.id %}
+            <a href="{% url "update_user" %}" class="btn btnaqua"> Update Profile </a>
+          {% endif %}
+        </div>
+        <div class="left">
+          {% if nux %}
+            {% for nex in nux %}
+              <div class='alert bg-dark nex' role='alert'>
+                <div class="container">
+                  <div class="row">
+                    <div class="bodymain">
+                      {% if profile.profile_image %}
+                        <img src="{{ profile.profile_image.url }}" alt="" height="50" width="50" class="rounded-circle">
+                      {% else %}
+                        <img src="{% static "images/logo.png" %}" alt="" height="50" width="50" class="rounded-circle">
+                      {% endif %}
+                      <p>{{ nex.body }}</p>
+                    </div>
+                    <div class="bodyside">
+                      
+                        <small class="text-muted">
+                          {{ nex.created_at }} by <br> <span> @{{ nex.user.username }} </span> - {{ nex.number_of_likes }} Likes
+                          {% if user in nex.likes.all %}
+                            <a href="{% url "nex_like" nex.id %}"> <i style="color:#ff004f;" class="fa fa-heart"></i></a>
+                          {% else %}
+                            <a href="{% url "nex_like" nex.id %}"> <i style="color:#ff004f;" class="fa fa-heart-o"></i></a>
+                          {% endif %}
+                          <a href="{% url "nex_show" nex.id %}"> <i style="color:aquamarine;" class="fa fa-share"></i></a>
+                          {% if request.user.username == profile.user.username %}
+                            <a href="{% url "delete_nex" nex.id %}"> <i style="color:grey;" class="fa fa-trash-alt"></i></a>
+                            <a href="{% url "edit_nex" nex.id %}"> <i style="color:grey;" class="fa fa-edit"></i></a>
+                          {% endif %}
+                        </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          {% endif %}
         </div>
       </div>
-      <div class="card bg-dark">
-        <h5 class="card-header"> <strong> Followed By </strong> </h5>
-        <br>
-        <p class="card-text">
-          {% for following in profile.followed_by.all|slice:3 %}
-            <a class="profile-tags" href="{% url "profile" following.user.id %}"> @{{ following }} </a> 
-            {% if following in profile.follows.all %}
-              <a href="{% url "unfollow" following.user.id %}"> <i class="fa fa-user-minus small" aria-hidden="true" style="color:red;"></i></a> <br> 
-            {% else %}
-              <a href="{% url "follow" following.user.id %}"> <i class="fa fa-user-plus small" aria-hidden="true" style="color:lime;"></i></a> <br> 
-            {% endif %}
-          {% endfor %}
-        </p>
-        <br>
-        <div class="card-footer text-end">
-          <a class="btn btn-sm btn-primary" href="{% url "followers" profile.user.id %}"> See All </a>
-        </div>
-      </div>  
-      <form method='POST'>
-        {% csrf_token %}
-        {% if profile in user.profile.follows.all %}
-          <button class="btn btn-outline-danger" name="follow" value="unfollow" type="submit"> unfollow @{{ profile.user.username|lower }} </button>
-        {% else %}
-          <button class="btn btn-outline-success" name="follow" value="follow" type="submit"> follow @{{ profile.user.username|lower }} </button>
-        {% endif %}
-      </form>
-      {% if request.user.id == profile.user.id %}
-        <a href="{% url "update_user" %}" class="btn btn-outline-primary"> Update Profile </a>
-      {% endif %}
     </div>
   {% endif %}
 {% endblock %} 

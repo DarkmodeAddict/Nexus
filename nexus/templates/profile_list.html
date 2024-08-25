@@ -2,29 +2,33 @@
 {% load static %}
 
 {% block content %}
-  <h1>Profiles</h1>
-  {% if profiles %} 
-    {% for profile in profiles %}
-      <div class="card bg-dark mb-3" style="max-width: 540px">
-        <div class="row g-0">
-          <div class="col-md-4">
-            {% if profile.profile_image %}
-              <img src="{{ profile.profile_image.url }}" alt="" height="200" width="200" class="img-fluid rounded-circle">
-            {% else %}
-              <img src="{% static "images/logo.png" %} " height="200" width="200" class="img-fluid rounded-circle" alt="" />
-            {% endif %}
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title"> {{ profile.user.username }} </h5>
-              <p class="card-text"> <a class="profile-tags" href="{% url "profile" profile.user.id %}"> @{{ profile.user.username|lower }} </a> </p>
-              <p class="card-text">
-                <small class="text-body-secondary"> {{ profile.date_modified }} </small>
-              </p>
+  <div style="margin: 20px 30px">
+    <h1 style="text-align: center;"> See all <span> Nexus </span> profiles </h1>
+    <div class="profiless">
+      {% if profiles %} 
+        {% for profile in profiles %}
+          <div class="card bg-dark mb-3" style="border-radius: 40px;">
+            <div class="cardss">
+              <div>
+                {% if profile.profile_image %}
+                  <img src="{{ profile.profile_image.url }}" alt="" class="rounded-circle">
+                {% else %}
+                  <img src="{% static "images/logo.png" %} " class="rounded-circle" alt="" />
+                {% endif %}
+              </div>
+              <div>
+                <div class="card-body">
+                  <h5 class="card-title"> {{ profile.user.username }} </h5>
+                  <p class="card-text"> <a class="profile-tags" href="{% url "profile" profile.user.id %}"> @{{ profile.user.username|lower }} </a> </p>
+                  <p class="card-text">
+                    <small class="text-body-secondary"> {{ profile.date_modified }} </small>
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    {% endfor %} 
-  {% endif %} 
+        {% endfor %} 
+      {% endif %}
+    </div>
+  </div>
 {% endblock %}
