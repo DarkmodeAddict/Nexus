@@ -44,28 +44,34 @@
         <h5 class="card-header"> <strong> Follows </strong> </h5>
         <br>
         <p class="card-text">
-          {% for following in profile.follows.all %}
+          {% for following in profile.follows.all|slice:3 %}
             <a class="profile-tags" href="{% url "profile" following.user.id %}"> @{{ following }} </a> 
             <a href="{% url "unfollow" following.user.id %}"> <i class="fa fa-circle-minus small" aria-hidden="true" style="color:grey;"></i></a> <br>
           {% endfor %}
         </p>
         <br>
+        <div class="card-footer text-end">
+          <a class="btn btn-sm btn-primary" href="{% url "follows" profile.user.id %}"> See All </a>
+        </div>
       </div>
       <div class="card bg-dark">
         <h5 class="card-header"> <strong> Followed By </strong> </h5>
         <br>
         <p class="card-text">
-          {% for following in profile.followed_by.all %}
+          {% for following in profile.followed_by.all|slice:3 %}
             <a class="profile-tags" href="{% url "profile" following.user.id %}"> @{{ following }} </a> 
             {% if following in profile.follows.all %}
               <a href="{% url "unfollow" following.user.id %}"> <i class="fa fa-user-minus small" aria-hidden="true" style="color:red;"></i></a> <br> 
             {% else %}
-              <a href="{% url "unfollow" following.user.id %}"> <i class="fa fa-user-plus small" aria-hidden="true" style="color:lime;"></i></a> <br> 
+              <a href="{% url "follow" following.user.id %}"> <i class="fa fa-user-plus small" aria-hidden="true" style="color:lime;"></i></a> <br> 
             {% endif %}
           {% endfor %}
         </p>
         <br>
-      </div>
+        <div class="card-footer text-end">
+          <a class="btn btn-sm btn-primary" href="{% url "followers" profile.user.id %}"> See All </a>
+        </div>
+      </div>  
       <form method='POST'>
         {% csrf_token %}
         {% if profile in user.profile.follows.all %}

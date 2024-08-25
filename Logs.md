@@ -70,3 +70,8 @@
 - Follow and Unfollow system from profile page system made.
 - New view system and url at ./nexus/views.py and ./nexus/urls.py.
 - Form model for profile bio and likes at ./nexus/forms.py.
+
+### Version 0.12
+- Separate followers and following viewing page created.
+- Followers and Following views created at ./nexus/views.py.
+- Following and Unfollowing from specific pages option enabled as well.
