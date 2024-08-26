@@ -107,3 +107,7 @@
 - Update user form changed at ./nexus/templates/update_user.html.
 - Base changes at ./nexus/templates/base.html.
 - Pictures fluid and flow changed and fixed.
+
+### Version 0.16
+- Connection to PostgreSQL via Render.
+- Added via dotenv.
